@@ -133,18 +133,6 @@ var setDevMenu = function() {
     var devMenu = Menu.buildFromTemplate([{
         label: 'Window',
         submenu: [{
-            label: 'Toggle Full Screen',
-            accelerator: process.platform === 'darwin' ? 'Ctrl+Command+F' : 'F11',
-            click(item, focusedWindow) {
-                if (focusedWindow) {
-                    focusedWindow.setFullScreen(!focusedWindow.isFullScreen());
-                }
-            }
-        }, {
-            label: 'Minimize',
-            accelerator: 'CmdOrCtrl+M',
-            role: 'minimize'
-        }, {
             label: 'Quit',
             accelerator: 'CmdOrCtrl+Q',
             click: function() {
@@ -160,7 +148,7 @@ var setDevMenu = function() {
                     properties: ['openFile', 'multiSelections'],
                     filters: [{
                         name: 'Images',
-                        extensions: ['jpg', 'png', 'gif', 'webp']
+                        extensions: ['jpg', 'jpeg', 'png', 'gif', 'webp']
                     }]
                 }, function(files) {
                     mainWindow.webContents.send('openedFiles', files);
@@ -173,7 +161,7 @@ var setDevMenu = function() {
                     properties: ['openDirectory'],
                     filters: [{
                         name: 'Images',
-                        extensions: ['jpg', 'png', 'gif', 'webp']
+                        extensions: ['jpg', 'jpeg', 'png', 'gif', 'webp']
                     }]
                 }, function(directory) {
                     mainWindow.webContents.send('openDirectory', directory);
@@ -646,6 +634,21 @@ var setDevMenu = function() {
                 checked: defaults.scale == 5,
                 click: function() {
                     updateConfig('scale', 5);
+                }
+            }
+        }, {
+            label: 'Developer Tools',
+            submenu: [{
+                label: 'Reload',
+                accelerator: 'CmdOrCtrl+R',
+                click: function() {
+                    BrowserWindow.getFocusedWindow().webContents.reloadIgnoringCache();
+                }
+            }, {
+                label: 'Toggle DevTools',
+                accelerator: 'Alt+CmdOrCtrl+I',
+                click: function() {
+                    BrowserWindow.getFocusedWindow().toggleDevTools();
                 }
             }]
         }]
@@ -1369,6 +1372,21 @@ var setDevMenu = function() {
             click: function(menuItem) {
                 updateConfig('hideControlOnEnd', menuItem.checked);
             }
+        }, {
+            label: 'Enter Fullscreen',
+            accelerator: process.platform === 'darwin' ? 'Ctrl+Command+F' : 'F11',
+            click(item, focusedWindow) {
+                if (focusedWindow) {
+                    focusedWindow.setFullScreen(!focusedWindow.isFullScreen());
+                }
+            }
+        }]
+    }, {
+        label: 'Window',
+        submenu: [{
+            label: 'Minimize',
+            accelerator: 'CmdOrCtrl+M',
+            role: 'minimize'
         }]
     }, {
         label: 'Help',
@@ -1396,21 +1414,6 @@ var setDevMenu = function() {
             label: 'Author',
             click: function() {
                 require('electron').shell.openExternal('https://twitter.com/sachinchoolur');
-            }
-        }, {
-            label: 'Developement',
-            submenu: [{
-                label: 'Reload',
-                accelerator: 'CmdOrCtrl+R',
-                click: function() {
-                    BrowserWindow.getFocusedWindow().webContents.reloadIgnoringCache();
-                }
-            }, {
-                label: 'Toggle DevTools',
-                accelerator: 'Alt+CmdOrCtrl+I',
-                click: function() {
-                    BrowserWindow.getFocusedWindow().toggleDevTools();
-                }
             }]
         }]
     }]);
