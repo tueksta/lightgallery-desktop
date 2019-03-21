@@ -41,7 +41,7 @@ var defaults = {
     escKey: false,
     keyPress: true,
     controls: true,
-    slideEndAnimatoin: true,
+    slideEndAnimation: true,
     hideControlOnEnd: false,
     mousewheel: true,
 

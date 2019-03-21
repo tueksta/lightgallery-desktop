@@ -40,7 +40,7 @@ var defaults = {
     escKey: false,
     keyPress: true,
     controls: true,
-    slideEndAnimatoin: true,
+    slideEndAnimation: true,
     hideControlOnEnd: false,
     mousewheel: true,
 
@@ -1356,11 +1356,11 @@ var setDevMenu = function() {
                 }
             }]
         }, {
-            label: 'slideEndAnimatoin',
+            label: 'slideEndAnimation',
             type: 'checkbox',
-            checked: defaults.slideEndAnimatoin,
+            checked: defaults.slideEndAnimation,
             click: function(menuItem) {
-                updateConfig('slideEndAnimatoin', menuItem.checked);
+                updateConfig('slideEndAnimation', menuItem.checked);
             }
         }, {
             label: 'hideControlOnEnd',

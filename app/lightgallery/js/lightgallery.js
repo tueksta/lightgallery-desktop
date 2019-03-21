@@ -29,7 +29,7 @@
         escKey: true,
         keyPress: true,
         controls: true,
-        slideEndAnimatoin: true,
+        slideEndAnimation: true,
         hideControlOnEnd: false,
         mousewheel: true,
 
@@ -101,7 +101,7 @@
         this.isTouch = ('ontouchstart' in document.documentElement);
 
         // Disable hideControlOnEnd if sildeEndAnimation is true
-        if (this.s.slideEndAnimatoin) {
+        if (this.s.slideEndAnimation) {
             this.s.hideControlOnEnd = false;
         }
 
@@ -881,7 +881,7 @@
                     _this.index = 0;
                     _this.$el.trigger('onBeforeNextSlide.lg', [_this.index]);
                     _this.slide(_this.index, fromTouch, false);
-                } else if (_this.s.slideEndAnimatoin) {
+                } else if (_this.s.slideEndAnimation) {
                     _this.$outer.addClass('lg-right-end');
                     setTimeout(function() {
                         _this.$outer.removeClass('lg-right-end');
@@ -907,7 +907,7 @@
                     _this.index = _this.$items.length - 1;
                     _this.$el.trigger('onBeforePrevSlide.lg', [_this.index, fromTouch]);
                     _this.slide(_this.index, fromTouch, false);
-                } else if (_this.s.slideEndAnimatoin) {
+                } else if (_this.s.slideEndAnimation) {
                     _this.$outer.addClass('lg-left-end');
                     setTimeout(function() {
                         _this.$outer.removeClass('lg-left-end');
