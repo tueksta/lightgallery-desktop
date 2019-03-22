@@ -36,7 +36,7 @@ Settings
 |speed|`600`|Transition duration (in ms).|
 |hideBarsDelay|`6000`|Delay for hiding gallery controls in ms|
 |useLeft|`false`|force lightgallery to use css left property instead of transform.|
-|closable|`true`|allows clicks on dimmer to close gallery.|
+|closeable|`true`|allows clicks on dimmer to close gallery.|
 |loop|`true`|If `false`, will disable the ability to loop back to the beginning of the gallery when on the last element.|
 |keyPress|`true`|Enable keyboard navigation|
 |controls|`true`|If `false`, prev/next buttons will not be displayed.|
@@ -64,19 +64,19 @@ Settings
 |pager|`true`|Enable/Disable pager|
 |zoom|`true`|Enable/Disable zoom option|
 |scale|`1`|Value of zoom should be incremented/decremented|
- 
 
- 
+
+
 Development
 ---
 #### Project's folders
 
-- `app` - code of your application goes here.
-- `config` - place for you to declare environment specific stuff.
-- `build` - in this folder lands built, runnable application.
-- `releases` - ready for distribution installers will land here.
-- `resources` - resources for particular operating system.
-- `tasks` - build and development environment scripts.
+- `app` - application source code
+- `build` - built, runnable application.
+- `config` - environment specific stuff
+- `releases` - ready for distribution installers
+- `resources` - resources for particular operating system
+- `tasks` - build and development environment scripts
 
 
 #### Installation
@@ -102,36 +102,11 @@ To make ready for distribution installer use command:
 ```
 npm run release
 ```
-It will start the packaging process for the operating system you are running this command on. The file which is ready for distribution will be outputted to `releases` directory.
+It will start the packaging process for the operating system you are running this command on. The file which is ready for distribution will be put into `releases` directory.
 
-You can create Windows installer only when running on Windows, the same is true for Linux and OSX. So to generate all three installers you need all three operating systems.
+Installers can only be build on the target operating system.
 
-
-Other Projects
-----
-
-##### [LightGallery for web](https://github.com/sachinchoolur/lightGallery)
-> A customizable, modular, responsive, lightbox gallery plugin.
-
-##### [jQuery lightslider](https://github.com/sachinchoolur/lightslider)
-> lightSlider is a lightweight responsive Content slider with carousel thumbnails navigation.
-
-##### [Angular flash](https://github.com/sachinchoolur/angular-flash)
-> A simple lightweight flash message module for angularjs
-
-##### [ngclipboard](https://github.com/sachinchoolur/ngclipboard)
-> An angularjs directive to copy text to clipboard without using flash
-
-##### [Angular trix](http://sachinchoolur.github.io/angular-trix/)
-> A rich WYSIWYG text editor directive for angularjs.
-
-##### [ladda-angular](https://github.com/sachinchoolur/ladda-angular)
-> Ladda button directive for angularjs
-
-##### [Teamwave](http://www.teamwave.com/?kid=676V2)
-> Integrated Suite of Business Applications.. (Not an open source project but free for the first 1,000 Companies!)
-
-Follow me on twitter [@sachinchoolur](https://twitter.com/sachinchoolur) for the latest news, updates about this project.
+Original idea and implementation by [@sachinchoolur](https://twitter.com/sachinchoolur).
 
 Special thanks to [Jakub Szwacz](https://github.com/szwacz) for electron boilerplate
 

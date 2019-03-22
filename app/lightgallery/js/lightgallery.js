@@ -24,7 +24,7 @@
 
         useLeft: false,
 
-        closable: true,
+        closeable: true,
         loop: true,
         escKey: true,
         keyPress: true,
@@ -1184,7 +1184,7 @@
             _this.destroy();
         });
 
-        if (_this.s.closable) {
+        if (_this.s.closeable) {
 
             // If you drag the slide and release outside gallery gets close on chrome
             // for preventing this check mousedown and mouseup happened on .lg-item or lg-outer

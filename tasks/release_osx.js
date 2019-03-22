@@ -1,7 +1,7 @@
 'use strict';
 
 var Q = require('q');
-var gulpUtil = require('gulp-util');
+var log = require('fancy-log');
 var jetpack = require('fs-jetpack');
 var asar = require('asar');
 var utils = require('./utils');
@@ -24,7 +24,7 @@ var init = function () {
 };
 
 var copyRuntime = function () {
-    return projectDir.copyAsync('node_modules/electron-prebuilt/dist/Electron.app', finalAppDir.path());
+    return projectDir.copyAsync('node_modules/electron/dist/Electron.app', finalAppDir.path());
 };
 
 var cleanupRuntime = function() {
@@ -34,13 +34,9 @@ var cleanupRuntime = function() {
 }
 
 var packageBuiltApp = function () {
-    var deferred = Q.defer();
-
     asar.createPackage(projectDir.path('build'), finalAppDir.path('Contents/Resources/app.asar'), function() {
-        deferred.resolve();
+        resolve();
     });
-
-    return deferred.promise;
 };
 
 var finalize = function () {
@@ -71,9 +67,12 @@ var finalize = function () {
 
 var renameApp = function() {
     // Rename helpers
+    log('Renaming app');
     [' Helper EH', ' Helper NP', ' Helper'].forEach(function (helper_suffix) {
-        finalAppDir.rename('Contents/Frameworks/Electron' + helper_suffix + '.app/Contents/MacOS/Electron' + helper_suffix, manifest.productName + helper_suffix );
         finalAppDir.rename('Contents/Frameworks/Electron' + helper_suffix + '.app', manifest.productName + helper_suffix + '.app');
+    });
+    [' Helper'].forEach(function (helper_suffix) {
+        finalAppDir.rename('Contents/Frameworks/' + manifest.productName + helper_suffix + '.app/Contents/MacOS/Electron' + helper_suffix, manifest.productName + helper_suffix );
     });
     // Rename application
     finalAppDir.rename('Contents/MacOS/Electron', manifest.productName);
@@ -84,7 +83,7 @@ var signApp = function () {
     var identity = utils.getSigningId();
     if (identity) {
         var cmd = 'codesign --deep --force --sign "' + identity + '" "' + finalAppDir.path() + '"';
-        gulpUtil.log('Signing with:', cmd);
+        log('Signing with:', cmd);
         return Q.nfcall(child_process.exec, cmd);
     } else {
         return Q();
@@ -110,7 +109,7 @@ var packToDmgFile = function () {
     // Delete DMG file with this name if already exists
     releasesDir.remove(dmgName);
 
-    gulpUtil.log('Packaging to DMG file...');
+    log('Packaging to DMG file...');
 
     var readyDmgPath = releasesDir.path(dmgName);
     appdmg({
@@ -121,7 +120,7 @@ var packToDmgFile = function () {
         console.error(err);
     })
     .on('finish', function () {
-        gulpUtil.log('DMG file ready!', readyDmgPath);
+        log('DMG file ready!', readyDmgPath);
         deferred.resolve();
     });
 

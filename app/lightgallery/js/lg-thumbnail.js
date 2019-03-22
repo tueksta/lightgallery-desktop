@@ -83,7 +83,7 @@
                 this.thumbClickable = true;
             }
 
-            this.toogle();
+            this.toggle();
             this.thumbkeyPress();
         }
     };
@@ -449,12 +449,12 @@
 
     };
 
-    Thumbnail.prototype.toogle = function() {
+    Thumbnail.prototype.toggle = function() {
         var _this = this;
         if (_this.core.s.toggleThumb) {
             _this.core.$outer.addClass('lg-can-toggle');
-            _this.$thumbOuter.append('<span class="lg-toogle-thumb lg-icon"></span>');
-            _this.core.$outer.find('.lg-toogle-thumb').on('click.lg', function() {
+            _this.$thumbOuter.append('<span class="lg-toggle-thumb lg-icon"></span>');
+            _this.core.$outer.find('.lg-toggle-thumb').on('click.lg', function() {
                 _this.core.$outer.toggleClass('lg-thumb-open');
             });
         }
