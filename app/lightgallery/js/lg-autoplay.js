@@ -13,7 +13,7 @@
         autoplay: false,
         pause: 5000,
         progressBar: true,
-        fourceAutoplay: false,
+        forceAutoplay: false,
         autoplayControls: true,
         appendAutoplayControlsTo: '.lg-toolbar'
     };
@@ -42,8 +42,8 @@
         // Identify if autoplay canceled from touch/drag
         this.canceledOnTouch = false;
 
-        // save fourceautoplay value
-        this.fourceAutoplayTemp = this.core.s.fourceAutoplay;
+        // save forceAutoplay value
+        this.forceAutoplayTemp = this.core.s.forceAutoplay;
 
         // do not allow progress bar if browser does not support css3 transitions
         if (!this.core.doCss()) {
@@ -116,8 +116,8 @@
                 }
             }
 
-            // Remove setinterval if slide is trigered manualy and fourceautoplay is false
-            if (!_this.fromAuto && !_this.core.s.fourceAutoplay) {
+            // Remove setinterval if slide is trigered manualy and forceAutoplay is false
+            if (!_this.fromAuto && !_this.core.s.forceAutoplay) {
                 _this.cancelAuto();
             }
 
@@ -137,11 +137,11 @@
         _this.core.$outer.find('.lg-autoplay-button').on('click.lg', function() {
             if ($(_this.core.$outer).hasClass('lg-show-autoplay')) {
                 _this.cancelAuto();
-                _this.core.s.fourceAutoplay = false;
+                _this.core.s.forceAutoplay = false;
             } else {
                 if (!_this.interval) {
                     _this.startlAuto();
-                    _this.core.s.fourceAutoplay = _this.fourceAutoplayTemp;
+                    _this.core.s.forceAutoplay = _this.forceAutoplayTemp;
                 }
             }
         });

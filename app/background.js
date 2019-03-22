@@ -40,7 +40,7 @@ var defaults = {
     escKey: false,
     keyPress: true,
     controls: true,
-    slideEndAnimatoin: true,
+    slideEndAnimation: true,
     hideControlOnEnd: false,
     mousewheel: true,
 
@@ -49,14 +49,14 @@ var defaults = {
 
     /**
      * @desc number of preload slides
-     * will exicute only after the current slide is fully loaded.
+     * will execute only after the current slide is fully loaded.
      *
      * @ex you clicked on 4th image and if preload = 1 then 3rd slide and 5th
      * slide will be loaded in the background after the 4th slide is fully loaded..
      * if preload is 2 then 2nd 3rd 5th 6th slides will be preloaded.. ... ...
      *
      */
-    preload: 1,
+    preload: 2,
     showAfterLoad: true,
     selector: '',
     selectWithin: '',
@@ -85,7 +85,7 @@ var defaults = {
     autoplay: false,
     pause: 5000,
     progressBar: true,
-    fourceAutoplay: false,
+    forceAutoplay: false,
     autoplayControls: true,
     appendAutoplayControlsTo: '.lg-toolbar',
     pager: false,
@@ -100,7 +100,7 @@ var defaults = {
 
     exThumbImage: false,
     showThumbByDefault: true,
-    toogleThumb: true,
+    toggleThumb: true,
     pullCaptionUp: true,
 
     enableThumbDrag: true,
@@ -133,18 +133,6 @@ var setDevMenu = function() {
     var devMenu = Menu.buildFromTemplate([{
         label: 'Window',
         submenu: [{
-            label: 'Toggle Full Screen',
-            accelerator: process.platform === 'darwin' ? 'Ctrl+Command+F' : 'F11',
-            click(item, focusedWindow) {
-                if (focusedWindow) {
-                    focusedWindow.setFullScreen(!focusedWindow.isFullScreen());
-                }
-            }
-        }, {
-            label: 'Minimize',
-            accelerator: 'CmdOrCtrl+M',
-            role: 'minimize'
-        }, {
             label: 'Quit',
             accelerator: 'CmdOrCtrl+Q',
             click: function() {
@@ -160,7 +148,7 @@ var setDevMenu = function() {
                     properties: ['openFile', 'multiSelections'],
                     filters: [{
                         name: 'Images',
-                        extensions: ['jpg', 'png', 'gif', 'webp']
+                        extensions: ['jpg', 'jpeg', 'png', 'gif', 'webp']
                     }]
                 }, function(files) {
                     mainWindow.webContents.send('openedFiles', files);
@@ -173,7 +161,7 @@ var setDevMenu = function() {
                     properties: ['openDirectory'],
                     filters: [{
                         name: 'Images',
-                        extensions: ['jpg', 'png', 'gif', 'webp']
+                        extensions: ['jpg', 'jpeg', 'png', 'gif', 'webp']
                     }]
                 }, function(directory) {
                     mainWindow.webContents.send('openDirectory', directory);
@@ -181,39 +169,39 @@ var setDevMenu = function() {
             }
         }]
     }, {
-        label: 'Thumbnail',
+        label: 'Thumbnail Viewer',
         submenu: [{
-            label: 'thumbnail',
+            label: 'Toggle Thumbnail Viewer',
             type: 'checkbox',
             checked: defaults.thumbnail,
             click: function(menuItem) {
                 updateConfig('thumbnail', menuItem.checked);
             }
         }, {
-            label: 'animateThumb',
+            label: 'Infinite Scrolling',
             type: 'checkbox',
             checked: defaults.animateThumb,
             click: function(menuItem) {
                 updateConfig('animateThumb', menuItem.checked);
             }
         }, {
-            label: 'Current Pager Position',
+            label: 'Horizontal Alignment',
             submenu: [{
-                label: 'left',
+                label: 'Left',
                 type: 'radio',
                 checked: defaults.currentPagerPosition == 'left',
                 click: function() {
                     updateConfig('currentPagerPosition', 'left');
                 }
             }, {
-                label: 'middle',
+                label: 'Middle',
                 type: 'radio',
                 checked: defaults.currentPagerPosition == 'middle',
                 click: function() {
                     updateConfig('currentPagerPosition', 'middle');
                 }
             }, {
-                label: 'right',
+                label: 'Right',
                 type: 'radio',
                 checked: defaults.currentPagerPosition == 'right',
                 click: function() {
@@ -221,21 +209,21 @@ var setDevMenu = function() {
                 }
             }]
         }, {
-            label: 'toogleThumb',
+            label: 'Toggle Button',
             type: 'checkbox',
-            checked: defaults.toogleThumb,
+            checked: defaults.toggleThumb,
             click: function(menuItem) {
-                updateConfig('toogleThumb', menuItem.checked);
+                updateConfig('toggleThumb', menuItem.checked);
             }
         }, {
-            label: 'enableThumbDrag',
+            label: 'Draggable',
             type: 'checkbox',
             checked: defaults.enableThumbDrag,
             click: function(menuItem) {
                 updateConfig('enableThumbDrag', menuItem.checked);
             }
         }, {
-            label: 'Thumb width',
+            label: 'Thumbnail width',
             submenu: [{
                 label: '25 px',
                 type: 'radio',
@@ -322,7 +310,7 @@ var setDevMenu = function() {
                 }
             }]
         }, {
-            label: 'Thumb container height',
+            label: 'Thumbnail container height',
             submenu: [{
                 label: '25 px',
                 type: 'radio',
@@ -495,80 +483,14 @@ var setDevMenu = function() {
                     updateConfig('thumbMargin', 100);
                 }
             }]
-        }]
-    }, {
-        label: 'Settings',
-        submenu: [{
-            label: 'Enable Drag',
-            type: 'checkbox',
-            checked: defaults.enableDrag,
-            click: function(menuItem) {
-                updateConfig('enableDrag', menuItem.checked);
-            }
         }, {
-            label: 'loop',
-            type: 'checkbox',
-            checked: defaults.loop,
-            click: function(menuItem) {
-                updateConfig('loop', menuItem.checked);
-            }
-        }, {
-            label: 'keyPress',
-            type: 'checkbox',
-            checked: defaults.keyPress,
-            click: function(menuItem) {
-                updateConfig('keyPress', menuItem.checked);
-            }
-        }, {
-            label: 'controls',
-            type: 'checkbox',
-            checked: defaults.controls,
-            click: function(menuItem) {
-                updateConfig('controls', menuItem.checked);
-            }
-        }, {
-            label: 'mousewheel',
-            type: 'checkbox',
-            checked: defaults.mousewheel,
-            click: function(menuItem) {
-                updateConfig('mousewheel', menuItem.checked);
-            }
-        }, {
-            label: 'showAfterLoad',
-            type: 'checkbox',
-            checked: defaults.showAfterLoad,
-            click: function(menuItem) {
-                updateConfig('showAfterLoad', menuItem.checked);
-            }
-        }, {
-            label: 'counter',
-            type: 'checkbox',
-            checked: defaults.counter,
-            click: function(menuItem) {
-                updateConfig('counter', menuItem.checked);
-            }
-        }, {
-            label: 'pager',
-            type: 'checkbox',
-            checked: defaults.pager,
-            click: function(menuItem) {
-                updateConfig('pager', menuItem.checked);
-            }
-        }, {
-            label: 'zoom',
-            type: 'checkbox',
-            checked: defaults.zoom,
-            click: function(menuItem) {
-                updateConfig('zoom', menuItem.checked);
-            }
-        }, {
-            label: 'Scale',
+            label: 'Zoom level',
             submenu: [{
-                label: '0.3',
+                label: '0.25',
                 type: 'radio',
-                checked: defaults.scale == 0.3,
+                checked: defaults.scale == 0.25,
                 click: function() {
-                    updateConfig('scale', 0.3);
+                    updateConfig('scale', 0.25);
                 }
             }, {
                 label: '0.5',
@@ -578,11 +500,11 @@ var setDevMenu = function() {
                     updateConfig('scale', 0.5);
                 }
             }, {
-                label: '0.8',
+                label: '0.75',
                 type: 'radio',
-                checked: defaults.scale == 0.8,
+                checked: defaults.scale == 0.75,
                 click: function() {
-                    updateConfig('scale', 0.8);
+                    updateConfig('scale', 0.75);
                 }
             }, {
                 label: '1',
@@ -594,30 +516,9 @@ var setDevMenu = function() {
             }, {
                 label: '1.2',
                 type: 'radio',
-                checked: defaults.scale == 1.2,
-                click: function() {
-                    updateConfig('scale', 1.2);
-                }
-            }, {
-                label: '1.3',
-                type: 'radio',
-                checked: defaults.scale == 1.3,
-                click: function() {
-                    updateConfig('scale', 1.3);
-                }
-            }, {
-                label: '1.5',
-                type: 'radio',
                 checked: defaults.scale == 1.5,
                 click: function() {
-                    updateConfig('scale', 1.5);
-                }
-            }, {
-                label: '1.8',
-                type: 'radio',
-                checked: defaults.scale == 1.8,
-                click: function() {
-                    updateConfig('scale', 1.8);
+                    updateConfig('scale', 1.2);
                 }
             }, {
                 label: '2',
@@ -625,13 +526,6 @@ var setDevMenu = function() {
                 checked: defaults.scale == 2,
                 click: function() {
                     updateConfig('scale', 2);
-                }
-            }, {
-                label: '2.5',
-                type: 'radio',
-                checked: defaults.scale == 2.5,
-                click: function() {
-                    updateConfig('scale', 2.5);
                 }
             }, {
                 label: '3',
@@ -647,53 +541,138 @@ var setDevMenu = function() {
                 click: function() {
                     updateConfig('scale', 5);
                 }
+            }
+        }]
+    }, {
+        label: 'Settings',
+        submenu: [{
+            label: 'Swipeable Pictures',
+            type: 'checkbox',
+            checked: defaults.enableDrag,
+            click: function(menuItem) {
+                updateConfig('enableDrag', menuItem.checked);
+            }
+        }, {
+            label: 'Keyboard Navigation',
+            type: 'checkbox',
+            checked: defaults.keyPress,
+            click: function(menuItem) {
+                updateConfig('keyPress', menuItem.checked);
+            }
+        }, {
+            label: 'Scrollwheel Navigation',
+            type: 'checkbox',
+            checked: defaults.mousewheel,
+            click: function(menuItem) {
+                updateConfig('mousewheel', menuItem.checked);
+            }
+        }, {
+            label: 'Zoom Controls',
+            type: 'checkbox',
+            checked: defaults.zoom,
+            click: function(menuItem) {
+                updateConfig('zoom', menuItem.checked);
+            }
+        }, {
+            type: 'separator'
+        }, {
+            label: 'Delay Until Loaded',
+            type: 'checkbox',
+            checked: defaults.showAfterLoad,
+            click: function(menuItem) {
+                updateConfig('showAfterLoad', menuItem.checked);
+            }
+        }, {
+            label: 'Loop back at end',
+            type: 'checkbox',
+            checked: defaults.loop,
+            click: function(menuItem) {
+                updateConfig('loop', menuItem.checked);
+            }
+        }, {
+            type: 'separator'
+        }, {
+            label: 'Onscreen Navigation Buttons',
+            type: 'checkbox',
+            checked: defaults.controls,
+            click: function(menuItem) {
+                updateConfig('controls', menuItem.checked);
+            }
+        }, {
+            label: 'Onscreen Navigation Loopback',
+            type: 'checkbox',
+            checked: defaults.hideControlOnEnd,
+            click: function(menuItem) {
+                updateConfig('hideControlOnEnd', menuItem.checked);
+            }
+        }, {
+            label: 'Navigation Index',
+            type: 'checkbox',
+            checked: defaults.counter,
+            click: function(menuItem) {
+                updateConfig('counter', menuItem.checked);
+            }
+        }, {
+            label: 'Page Dot Navigation',
+            type: 'checkbox',
+            checked: defaults.pager,
+            click: function(menuItem) {
+                updateConfig('pager', menuItem.checked);
+            }
+        }, {
+            label: 'Developer Tools',
+            submenu: [{
+                label: 'Hard Refresh',
+                accelerator: 'CmdOrCtrl+R',
+                click: function() {
+                    BrowserWindow.getFocusedWindow().webContents.reloadIgnoringCache();
+                }
+            }, {
+                label: 'Toggle DevTools',
+                accelerator: 'Alt+CmdOrCtrl+I',
+                click: function() {
+                    BrowserWindow.getFocusedWindow().toggleDevTools();
+                }
             }]
         }]
     }, {
         label: 'Autoplay',
         submenu: [{
-            label: 'autoplay',
+            label: 'Autoplay active',
             type: 'checkbox',
             checked: defaults.autoplay,
             click: function(menuItem) {
                 updateConfig('autoplay', menuItem.checked);
             }
         }, {
-            label: 'progressBar',
+            label: 'Show Progress Bar',
             type: 'checkbox',
             checked: defaults.progressBar,
             click: function(menuItem) {
                 updateConfig('progressBar', menuItem.checked);
             }
         }, {
-            label: 'fourceAutoplay',
+            label: 'Stop On User Actions',
             type: 'checkbox',
-            checked: defaults.fourceAutoplay,
+            checked: defaults.forceAutoplay,
             click: function(menuItem) {
-                updateConfig('fourceAutoplay', menuItem.checked);
+                updateConfig('forceAutoplay', menuItem.checked);
             }
         }, {
-            label: 'autoplayControls',
+            label: 'On Screen Controls',
             type: 'checkbox',
             checked: defaults.autoplayControls,
             click: function(menuItem) {
                 updateConfig('autoplayControls', menuItem.checked);
             }
         }, {
-            label: 'Pause',
+            label: 'Display Time',
             submenu: [{
                 label: '1000 ms',
                 type: 'radio',
                 checked: defaults.pause == 1000,
                 click: function() {
                     updateConfig('pause', 1000);
-                }
-            }, {
-                label: '1500 ms',
-                type: 'radio',
-                checked: defaults.pause == 1500,
-                click: function() {
-                    updateConfig('pause', 1500);
                 }
             }, {
                 label: '2000 ms',
@@ -703,13 +682,6 @@ var setDevMenu = function() {
                     updateConfig('pause', 2000);
                 }
             }, {
-                label: '2500 ms',
-                type: 'radio',
-                checked: defaults.pause == 2500,
-                click: function() {
-                    updateConfig('pause', 2500);
-                }
-            }, {
                 label: '3000 ms',
                 type: 'radio',
                 checked: defaults.pause == 3000,
@@ -717,25 +689,11 @@ var setDevMenu = function() {
                     updateConfig('pause', 3000);
                 }
             }, {
-                label: '3500 ms',
-                type: 'radio',
-                checked: defaults.pause == 3500,
-                click: function() {
-                    updateConfig('pause', 3500);
-                }
-            }, {
                 label: '4000 ms',
                 type: 'radio',
                 checked: defaults.pause == 4000,
                 click: function() {
                     updateConfig('pause', 4000);
-                }
-            }, {
-                label: '4500 ms',
-                type: 'radio',
-                checked: defaults.pause == 4500,
-                click: function() {
-                    updateConfig('pause', 4500);
                 }
             }, {
                 label: '5000 ms',
@@ -784,7 +742,7 @@ var setDevMenu = function() {
     }, {
         label: 'View',
         submenu: [{
-            label: 'Mode',
+            label: 'Transition Style',
             submenu: [{
                 label: 'Fade',
                 type: 'radio',
@@ -1004,7 +962,7 @@ var setDevMenu = function() {
                 }
             }]
         }, {
-            label: 'Easing',
+            label: 'Transition Timing Function',
             submenu: [{
                 label: 'linear',
                 type: 'radio',
@@ -1210,7 +1168,7 @@ var setDevMenu = function() {
                 }
             }]
         }, {
-            label: 'Speed',
+            label: 'Transition Speed',
             submenu: [{
                 label: '100 ms',
                 type: 'radio',
@@ -1283,8 +1241,15 @@ var setDevMenu = function() {
                 }
             }]
         }, {
-            label: 'hideBarsDelay',
+            label: 'Bar Hiding Delay',
             submenu: [{
+                label: '500 ms',
+                type: 'radio',
+                checked: defaults.hideBarsDelay == 500,
+                click: function() {
+                    updateConfig('hideBarsDelay', 500);
+                }
+            }, {
                 label: '1000 ms',
                 type: 'radio',
                 checked: defaults.hideBarsDelay == 1000,
@@ -1299,53 +1264,11 @@ var setDevMenu = function() {
                     updateConfig('hideBarsDelay', 2000);
                 }
             }, {
-                label: '3000 ms',
-                type: 'radio',
-                checked: defaults.hideBarsDelay == 3000,
-                click: function() {
-                    updateConfig('hideBarsDelay', 3000);
-                }
-            }, {
-                label: '4000 ms',
-                type: 'radio',
-                checked: defaults.hideBarsDelay == 4000,
-                click: function() {
-                    updateConfig('hideBarsDelay', 4000);
-                }
-            }, {
                 label: '5000 ms',
                 type: 'radio',
                 checked: defaults.hideBarsDelay == 5000,
                 click: function() {
                     updateConfig('hideBarsDelay', 5000);
-                }
-            }, {
-                label: '6000 ms',
-                type: 'radio',
-                checked: defaults.hideBarsDelay == 6000,
-                click: function() {
-                    updateConfig('hideBarsDelay', 6000);
-                }
-            }, {
-                label: '7000 ms',
-                type: 'radio',
-                checked: defaults.hideBarsDelay == 7000,
-                click: function() {
-                    updateConfig('hideBarsDelay', 7000);
-                }
-            }, {
-                label: '8000 ms',
-                type: 'radio',
-                checked: defaults.hideBarsDelay == 8000,
-                click: function() {
-                    updateConfig('hideBarsDelay', 8000);
-                }
-            }, {
-                label: '9000 ms',
-                type: 'radio',
-                checked: defaults.hideBarsDelay == 9000,
-                click: function() {
-                    updateConfig('hideBarsDelay', 9000);
                 }
             }, {
                 label: '10000 ms',
@@ -1356,61 +1279,39 @@ var setDevMenu = function() {
                 }
             }]
         }, {
-            label: 'slideEndAnimatoin',
+            label: 'Slide End Animation ?',
             type: 'checkbox',
-            checked: defaults.slideEndAnimatoin,
+            checked: defaults.slideEndAnimation,
             click: function(menuItem) {
-                updateConfig('slideEndAnimatoin', menuItem.checked);
+                updateConfig('slideEndAnimation', menuItem.checked);
+            }
+        }]
+    }, {
+        label: 'Window',
+        submenu: [{
+            label: 'Enter Fullscreen',
+            accelerator: process.platform === 'darwin' ? 'Ctrl+Command+F' : 'F11',
+            click(item, focusedWindow) {
+                if (focusedWindow) {
+                    focusedWindow.setFullScreen(!focusedWindow.isFullScreen());
+                }
             }
         }, {
-            label: 'hideControlOnEnd',
-            type: 'checkbox',
-            checked: defaults.hideControlOnEnd,
-            click: function(menuItem) {
-                updateConfig('hideControlOnEnd', menuItem.checked);
-            }
+            label: 'Minimize',
+            accelerator: 'CmdOrCtrl+M',
+            role: 'minimize'
         }]
     }, {
         label: 'Help',
         submenu: [{
             label: 'Github',
             click: function() {
-                require('electron').shell.openExternal('https://github.com/sachinchoolur/lightgallery-desktop');
-            }
-        }, {
-            label: 'Website',
-            click: function() {
-                require('electron').shell.openExternal('http://sachinchoolur.github.io/lightgallery-desktop/');
-            }
-        }, {
-            label: 'Report issues',
-            click: function() {
-                require('electron').shell.openExternal('https://github.com/sachinchoolur/lightgallery-desktop/issues');
-            }
-        }, {
-            label: 'Pull requests',
-            click: function() {
-                require('electron').shell.openExternal('https://github.com/sachinchoolur/lightgallery-desktop/pulls');
+                require('electron').shell.openExternal('https://github.com/tueksta/lightgallery-desktop');
             }
         }, {
             label: 'Author',
             click: function() {
-                require('electron').shell.openExternal('https://twitter.com/sachinchoolur');
-            }
-        }, {
-            label: 'Developement',
-            submenu: [{
-                label: 'Reload',
-                accelerator: 'CmdOrCtrl+R',
-                click: function() {
-                    BrowserWindow.getFocusedWindow().webContents.reloadIgnoringCache();
-                }
-            }, {
-                label: 'Toggle DevTools',
-                accelerator: 'Alt+CmdOrCtrl+I',
-                click: function() {
-                    BrowserWindow.getFocusedWindow().toggleDevTools();
-                }
+                require('electron').shell.openExternal('https://twitter.com/tueksta');
             }]
         }]
     }]);

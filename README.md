@@ -40,7 +40,7 @@ Settings
 |loop|`true`|If `false`, will disable the ability to loop back to the beginning of the gallery when on the last element.|
 |keyPress|`true`|Enable keyboard navigation|
 |controls|`true`|If `false`, prev/next buttons will not be displayed.|
-|slideEndAnimatoin|`true`|Enable slideEnd animation|
+|slideEndAnimation|`true`|Enable slideEnd animation|
 |hideControlOnEnd|`false`|If `true`, prev/next button will be hidden on first/last image.|
 |mousewheel|`true`|Change slide on mousewheel|
 |preload|`1`|Number of preload slides. will exicute only after the current slide is fully loaded. ex:// you clicked on 4th image and if preload = 1 then 3rd slide and 5th slide will be loaded in the background after the 4th slide is fully loaded.. if preload is 2 then 2nd 3rd 5th 6th slides will be preloaded|
@@ -54,13 +54,12 @@ Settings
 |thumbWidth|`100`|Width of each thumbnails.|
 |thumbContHeight|`100`|Height of the thumbnail container including padding and border|
 |thumbMargin|`5`|Spacing between each thumbnails|
-|toogleThumb|true|Whether to display thumbnail toggle button.|
+|toggleThumb|true|Whether to display thumbnail toggle button.|
 |enableThumbDrag|`true`|Enables desktop mouse drag support for thumbnails.|
-|swipeThreshold|`50`|By setting the swipeThreshold (in px) you can set how far the user must swipe for the next/prev slide.|
 |autoplay|`true`|Enable gallery autoplay|
 |pause|`5000`|The time (in ms) between each auto transition.|
 |progressBar |`true`|Enable autoplay progress bar|
-|fourceAutoplay|`false`|If `false` autoplay will be stopped after first user action|
+|forceAutoplay|`false`|If `false` autoplay will be stopped after first user action|
 |autoplayControls|`true`|Show/hide autoplay controls.|
 |pager|`true`|Enable/Disable pager|
 |zoom|`true`|Enable/Disable zoom option|
