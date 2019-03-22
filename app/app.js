@@ -86,7 +86,7 @@ var defaults = {
     autoplay: false,
     pause: 5000,
     progressBar: true,
-    fourceAutoplay: false,
+    forceAutoplay: false,
     autoplayControls: true,
     appendAutoplayControlsTo: '.lg-toolbar',
     pager: false,
@@ -101,7 +101,7 @@ var defaults = {
 
     exThumbImage: false,
     showThumbByDefault: true,
-    toogleThumb: true,
+    toggleThumb: true,
     pullCaptionUp: true,
 
     enableThumbDrag: true,

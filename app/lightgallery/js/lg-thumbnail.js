@@ -20,7 +20,7 @@
 
         exThumbImage: false,
         showThumbByDefault: true,
-        toogleThumb: true,
+        toggleThumb: true,
         pullCaptionUp: true,
 
         enableThumbDrag: true,
@@ -451,7 +451,7 @@
 
     Thumbnail.prototype.toogle = function() {
         var _this = this;
-        if (_this.core.s.toogleThumb) {
+        if (_this.core.s.toggleThumb) {
             _this.core.$outer.addClass('lg-can-toggle');
             _this.$thumbOuter.append('<span class="lg-toogle-thumb lg-icon"></span>');
             _this.core.$outer.find('.lg-toogle-thumb').on('click.lg', function() {
