@@ -4,21 +4,15 @@ An electron and nodejs based image viewer for Mac, Windows and Linux.
 Main features
 ---
 
-* Built with Electron.
+* Built with Electron
   * LightGallery uses HTML, CSS, and JavaScript with Chromium and Node.js to build the app.
-* Cross-platform.
-  * LightGallery works across operating systems. You can use it on OS X, Windows, or Linux. 
+* Cross-platform
 * 20+ Animations
-  * LightGallery comes with numerous number of beautiful in-built animations.
 * Animated thumbnails
-  * You also have the option to enable animated thumbnails from the settings.
 * Zoom & Fullscreen
-  * You can double-click on the image to see its actual size. Zoom-in and zoom-out controls can be used for changing the zoom values of the image.
 * Mouse Drag & Keyboard Navigation
 * Slideshow
-* Support various kind of image formats (jpg, png, gif, webp).
-
-##### Watch :star: this repository. More features are coming
+* Image formats (jpg, png, gif, webp)
 
 Settings
 ---
