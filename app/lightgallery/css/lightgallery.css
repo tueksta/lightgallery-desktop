@@ -203,6 +203,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
   background-color: #0D0A0A;
   bottom: 0;
   position: absolute;
+  float: center;
   width: 100%;
   z-index: 1080;
   max-height: 350px;
@@ -237,7 +238,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
   margin-bottom: -5px; }
 .lg-outer .lg-thumb-item {
   cursor: pointer;
-  float: center;
+  float: left;
   overflow: hidden;
   height: 100%;
   border: 2px solid #CCC;
