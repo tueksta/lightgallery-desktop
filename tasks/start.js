@@ -1,7 +1,7 @@
 'use strict';
 
 var Q = require('q');
-var electron = require('electron-prebuilt');
+var electron = require('electron');
 var pathUtil = require('path');
 var childProcess = require('child_process');
 var kill = require('tree-kill');
@@ -35,7 +35,8 @@ var runGulpWatch = function () {
     watch = childProcess.spawn(gulpPath, [
         'watch',
         '--env=' + utils.getEnvName(),
-        '--color'
+        '--color',
+
     ], {
         stdio: 'inherit'
     });
@@ -48,7 +49,7 @@ var runGulpWatch = function () {
 };
 
 var runApp = function () {
-    var app = childProcess.spawn(electron, ['./build'], {
+    var app = childProcess.spawn(electron, ['./build', '--inspect',], {
         stdio: 'inherit'
     });
 
@@ -64,4 +65,5 @@ runBuild()
 .then(function () {
     runGulpWatch();
     runApp();
+
 });

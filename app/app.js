@@ -36,7 +36,7 @@ var defaults = {
 
     useLeft: false,
 
-    closable: false,
+    closeable: false,
     loop: true,
     escKey: false,
     keyPress: true,

@@ -1,7 +1,7 @@
 'use strict';
 
 var Q = require('q');
-var gulpUtil = require('gulp-util');
+var gulpUtil = require('fancy-log');
 var childProcess = require('child_process');
 var jetpack = require('fs-jetpack');
 var asar = require('asar');
@@ -28,7 +28,7 @@ var init = function () {
 };
 
 var copyRuntime = function () {
-    return projectDir.copyAsync('node_modules/electron-prebuilt/dist', readyAppDir.path(), { overwrite: true });
+    return projectDir.copyAsync('node_modules/electron/dist', readyAppDir.path(), { overwrite: true });
 };
 
 var packageBuiltApp = function () {

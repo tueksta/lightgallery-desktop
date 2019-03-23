@@ -25,17 +25,17 @@ var defaults = {
 
     //'for jquery animation'
     easing: 'linear',
-    speed: 600,
+    speed: 200,
     height: '100%',
     width: '100%',
     addClass: '',
     startClass: 'lg-start-zoom',
     backdropDuration: 0,
-    hideBarsDelay: 6000,
+    hideBarsDelay: 2000,
 
     useLeft: false,
 
-    closable: false,
+    closeable: false,
     loop: true,
     escKey: false,
     keyPress: true,
@@ -63,7 +63,6 @@ var defaults = {
     nextHtml: '',
     prevHtml: '',
 
-    // 0, 1
     index: false,
 
     iframeMaxWidth: '100%',
@@ -541,7 +540,7 @@ var setDevMenu = function() {
                 click: function() {
                     updateConfig('scale', 5);
                 }
-            }
+            }]
         }]
     }, {
         label: 'Settings',
@@ -1312,7 +1311,7 @@ var setDevMenu = function() {
             label: 'Author',
             click: function() {
                 require('electron').shell.openExternal('https://twitter.com/tueksta');
-            }]
+            }
         }]
     }]);
     Menu.setApplicationMenu(devMenu);
@@ -1370,6 +1369,7 @@ app.on('ready', function() {
 });
 
 app.on('window-all-closed', function() {
+    log.console('quit');
     app.quit();
 });
 
@@ -1382,7 +1382,6 @@ app.on('activate', () => {
 app.on('open-file', (event, path) => {
     event.preventDefault();
 
-    //win.send('opened', path)
     if (ready) {
         win.webContents.send('opened', path);
         return;
@@ -1393,7 +1392,6 @@ app.on('open-file', (event, path) => {
 app.on('open-url', (event, path) => {
     event.preventDefault();
 
-    //win.send('opened', path)
     if (ready) {
         win.webContents.send('opened', path);
         return;
